@@ -36,35 +36,35 @@ def inject_tailwind_theme() -> None:
         .app-header {
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
-            padding: 0.5rem 1.5rem;
+            padding: 0.3rem 1rem;
             display: grid;
             grid-template-columns: 2fr 3fr 2fr;
             align-items: center;
-            gap: 1rem;
+            gap: 0.5rem;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        .header-left { font-size: 1rem; font-weight: 600; }
+        .header-left { font-size: 0.9rem; font-weight: 600; }
         .header-center {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             text-align: center;
             display: flex;
             flex-direction: column;
-            gap: 0.1rem;
+            gap: 0;
         }
         .header-right {
             display: flex;
-            gap: 0.5rem;
+            gap: 0.3rem;
             justify-content: flex-end;
         }
         .header-btn {
-            padding: 0.4rem 0.8rem;
-            border-radius: 6px;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
             border: 1px solid rgba(255,255,255,0.3);
             background: rgba(255,255,255,0.1);
             color: white;
             font-weight: 600;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             cursor: pointer;
             transition: all 0.2s;
         }
@@ -76,34 +76,34 @@ def inject_tailwind_theme() -> None:
         .content-wrapper {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0.75rem 1.5rem;
+            padding: 0.5rem 1rem;
         }
 
         /* Upload Section - Clean */
         .upload-area {
             background: white;
-            padding: 0.75rem 1rem;
-            border-radius: 6px;
-            margin-bottom: 0.75rem;
+            padding: 0.4rem 0.75rem;
+            border-radius: 4px;
+            margin-bottom: 0.4rem;
             border: 1px solid var(--border);
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
+            gap: 1rem;
         }
 
         .upload-label {
             font-weight: 600;
             color: var(--text);
-            font-size: 0.8rem;
-            margin-bottom: 0.375rem;
+            font-size: 0.75rem;
+            margin-bottom: 0.2rem;
         }
 
         /* Navigation - Clean Bar */
         .nav-bar {
             background: white;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            margin-bottom: 0.75rem;
+            padding: 0.3rem 0.75rem;
+            border-radius: 4px;
+            margin-bottom: 0.4rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -112,9 +112,9 @@ def inject_tailwind_theme() -> None:
 
         .nav-info {
             display: flex;
-            gap: 1.5rem;
+            gap: 1rem;
             align-items: center;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--text);
         }
 
@@ -125,55 +125,55 @@ def inject_tailwind_theme() -> None:
         .nav-info-text strong {
             color: var(--text-light);
             font-weight: 600;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             text-transform: uppercase;
         }
 
         /* Editor Section - Clean Panel */
         .editor-panel {
             background: white;
-            padding: 1rem;
-            border-radius: 6px;
-            margin-bottom: 0.75rem;
+            padding: 0.5rem 0.75rem;
+            border-radius: 4px;
+            margin-bottom: 0.4rem;
             border: 1px solid var(--border);
         }
 
         .panel-header {
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 600;
             color: var(--text);
-            margin-bottom: 0.75rem;
-            padding-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
+            padding-bottom: 0.3rem;
             border-bottom: 2px solid var(--primary);
         }
 
         .field-label {
             font-weight: 600;
             color: var(--text);
-            margin-bottom: 0.375rem;
-            font-size: 0.8rem;
+            margin-bottom: 0.2rem;
+            font-size: 0.75rem;
         }
 
         .field-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            margin-bottom: 0.75rem;
+            gap: 0.5rem;
+            margin-bottom: 0.4rem;
         }
 
         .field-row-4 {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 0.75rem;
-            margin-bottom: 0.75rem;
+            gap: 0.4rem;
+            margin-bottom: 0.4rem;
         }
 
         /* Reference Section */
         .reference-panel {
             background: #FAFBFC;
-            padding: 1rem;
-            border-radius: 6px;
-            margin-bottom: 0.75rem;
+            padding: 0.5rem 0.75rem;
+            border-radius: 4px;
+            margin-bottom: 0.4rem;
             border: 1px solid var(--border);
         }
 
