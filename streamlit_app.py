@@ -14,164 +14,227 @@ def inject_tailwind_theme() -> None:
         <script src="https://cdn.tailwindcss.com"></script>
         <style>
         :root {
-            --brand-primary: #1c64f2;
-            --brand-accent: #2563eb;
-            --brand-surface: #f8fafc;
+            --brand-primary: #4F46E5;
+            --brand-accent: #6366F1;
+            --brand-surface: #F9FAFB;
             --brand-card: #ffffff;
-            --brand-border: #e2e8f0;
-            --brand-text: #0f172a;
+            --brand-border: #E5E7EB;
+            --brand-text: #111827;
+            --success-bg: #D1FAE5;
+            --success-text: #065F46;
         }
         html, body {
             background: var(--brand-surface);
         }
         .block-container {
             padding: 0 !important;
+            max-width: 100% !important;
         }
         .tw-shell {
-            max-width: 1160px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 1.5rem 1.75rem 3rem;
+            padding: 1rem 1.5rem 2rem;
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 1rem;
         }
         .tw-card {
             background: var(--brand-card);
-            border-radius: 1rem;
+            border-radius: 0.75rem;
             border: 1px solid var(--brand-border);
-            box-shadow: 0 24px 48px -32px rgba(15, 23, 42, 0.35);
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
             width: 100%;
+        }
+        .tw-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.875rem 1.25rem;
+            background: linear-gradient(135deg, var(--brand-primary), var(--brand-accent));
+            border-radius: 0.75rem;
+            color: white;
+            box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.2);
+        }
+        .tw-header-left {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .tw-header-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .tw-header-name {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: white;
+        }
+        .tw-header-info {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.4;
         }
         .tw-pill {
             display: inline-flex;
             align-items: center;
             gap: 0.35rem;
-            background: rgba(28, 100, 242, 0.12);
+            background: rgba(79, 70, 229, 0.1);
             color: var(--brand-primary);
-            padding: 0.3rem 0.9rem;
+            padding: 0.25rem 0.75rem;
             border-radius: 999px;
             font-weight: 600;
-            font-size: 0.82rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.05em;
         }
         .tw-section-title {
-            font-size: 1.2rem;
+            font-size: 1.125rem;
             font-weight: 600;
-            color: #0f172a;
+            color: #111827;
+            margin-bottom: 0.5rem;
         }
         .tw-muted {
-            font-size: 0.95rem;
-            color: #64748b;
+            font-size: 0.875rem;
+            color: #6B7280;
         }
         .tw-chip {
-            border-radius: 0.95rem;
+            border-radius: 0.5rem;
             border: 1px solid var(--brand-border);
-            background: #f1f5f9;
-            padding: 0.5rem 0.9rem;
-            box-shadow: 0 18px 32px -28px rgba(15, 23, 42, 0.35);
+            background: #F3F4F6;
+            padding: 0.5rem 0.75rem;
             display: inline-flex;
             flex-direction: column;
             justify-content: center;
-            min-width: 145px;
+            min-width: 100px;
         }
         .tw-chip .label {
             display: block;
             text-transform: uppercase;
-            letter-spacing: 0.08em;
-            font-size: 0.65rem;
+            letter-spacing: 0.05em;
+            font-size: 0.625rem;
             font-weight: 600;
-            color: #475569;
-            margin-bottom: 0.35rem;
+            color: #6B7280;
+            margin-bottom: 0.25rem;
         }
         .tw-chip .value {
             display: block;
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 600;
-            color: #0f172a;
-            line-height: 1.25;
+            color: #111827;
+            line-height: 1.2;
         }
         .tw-field-label {
             font-weight: 600;
-            color: #1e293b;
-            margin-bottom: 0.35rem;
-            font-size: 0.92rem;
+            color: #374151;
+            margin-bottom: 0.375rem;
+            font-size: 0.875rem;
         }
         .tw-toast {
-            border-radius: 0.9rem;
-            padding: 0.55rem 0.85rem;
+            border-radius: 0.5rem;
+            padding: 0.5rem 0.75rem;
             font-weight: 500;
             display: inline-flex;
             align-items: center;
-            gap: 0.45rem;
-            font-size: 0.9rem;
+            gap: 0.5rem;
+            font-size: 0.875rem;
         }
         .tw-toast.success {
-            background: rgba(34, 197, 94, 0.12);
-            color: #15803d;
-            border: 1px solid rgba(34, 197, 94, 0.35);
+            background: var(--success-bg);
+            color: var(--success-text);
+            border: 1px solid #6EE7B7;
         }
         .tw-badge {
-            border-radius: 0.75rem;
-            padding: 0.3rem 0.8rem;
-            background: rgba(37, 99, 235, 0.12);
-            color: #1d4ed8;
+            border-radius: 0.375rem;
+            padding: 0.25rem 0.625rem;
+            background: rgba(79, 70, 229, 0.1);
+            color: var(--brand-primary);
             font-weight: 600;
             font-size: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.05em;
+            display: inline-block;
         }
-        .stTextArea textarea, .stTextInput input, .stNumberInput input {
-            border-radius: 0.85rem !important;
+        .tw-upload-section {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-end;
+        }
+        .tw-upload-group {
+            flex: 1;
+        }
+        .stTextArea textarea {
+            border-radius: 0.5rem !important;
             border: 1px solid var(--brand-border) !important;
-            background: #f1f5f9 !important;
-            padding: 0.75rem 1rem !important;
-            font-size: 0.95rem !important;
-            color: var(--brand-text);
-            height: auto !important;
-            min-height: 72px !important;
+            background: #F9FAFB !important;
+            padding: 0.625rem 0.875rem !important;
+            font-size: 0.875rem !important;
+            color: var(--brand-text) !important;
+            transition: all 0.2s ease !important;
         }
-        .stTextArea textarea:focus, .stTextInput input:focus, .stNumberInput input:focus {
-            border-color: rgba(28, 100, 242, 0.7) !important;
-            box-shadow: 0 0 0 4px rgba(28, 100, 242, 0.15) !important;
+        .stTextArea textarea:focus {
+            border-color: var(--brand-primary) !important;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1) !important;
             background: #ffffff !important;
         }
+        .stTextArea[data-baseweb="textarea"] {
+            min-height: auto !important;
+        }
+        .question-field textarea {
+            min-height: 90px !important;
+        }
+        .option-field textarea {
+            min-height: 60px !important;
+        }
+        .answer-field textarea {
+            min-height: 65px !important;
+        }
+        .explanation-field textarea {
+            min-height: 100px !important;
+        }
+        .glossary-field textarea {
+            min-height: 60px !important;
+        }
         .stButton>button {
-            border-radius: 0.9rem;
-            padding: 0.65rem 1.4rem;
-            border: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            background: linear-gradient(135deg, var(--brand-primary), var(--brand-accent));
-            color: white;
-            transition: transform 0.12s ease, box-shadow 0.2s ease;
-            width: 100%;
-            min-height: 44px;
+            border-radius: 0.5rem !important;
+            padding: 0.5rem 1rem !important;
+            border: none !important;
+            font-weight: 600 !important;
+            font-size: 0.875rem !important;
+            background: linear-gradient(135deg, var(--brand-primary), var(--brand-accent)) !important;
+            color: white !important;
+            transition: all 0.2s ease !important;
+            width: 100% !important;
+            min-height: 38px !important;
         }
         .stButton>button:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 18px 32px -18px rgba(37, 99, 235, 0.55);
+            transform: translateY(-1px) !important;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3) !important;
         }
         .stButton>button:disabled {
-            background: #cbd5f5;
-            color: #475569;
-            box-shadow: none;
+            background: #D1D5DB !important;
+            color: #6B7280 !important;
+            box-shadow: none !important;
+            transform: none !important;
+        }
+        .stDownloadButton>button, button[kind="secondary"] {
+            background: white !important;
+            color: var(--brand-primary) !important;
+            border: 2px solid var(--brand-primary) !important;
+        }
+        .stDownloadButton>button:hover, button[kind="secondary"]:hover {
+            background: var(--brand-surface) !important;
         }
         div[data-testid="stDataFrame"] {
-            border-radius: 1rem;
+            border-radius: 0.5rem;
             border: 1px solid var(--brand-border);
             overflow: hidden;
-            box-shadow: 0 18px 28px -25px rgba(15, 23, 42, 0.18);
         }
         .tw-inline-actions {
             display: flex;
             align-items: center;
             gap: 0.75rem;
             flex-wrap: wrap;
-        }
-        .tw-inline-actions .status {
-            flex: 1 1 auto;
-            min-width: 200px;
         }
         header, footer {visibility: hidden;}
         #MainMenu {display: none;}
@@ -433,62 +496,64 @@ def render_top_banner() -> None:
     login_at = user.get("login_at", "—")
     role = user.get("role", "")
 
-    st.markdown(
-        f"""
-        <div class="tw-card p-4">
-            <div class="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-                <div class="flex items-center gap-3 flex-wrap">
-                    <div class="flex flex-col gap-1">
-                        <div class="tw-pill">SME Workspace</div>
-                        <h1 class="text-xl md:text-2xl font-semibold text-slate-900 leading-tight">
-                            Hello, {teacher_name}{f' · {role}' if role else ''}
-                        </h1>
-                        <p class="tw-muted text-sm md:text-base">
-                            Manage bilingual questions, answers, and glossary notes in a single streamlined view.
-                        </p>
-                    </div>
-                </div>
-                <div class="tw-inline-actions">
-                    <div class="tw-chip">
-                        <span class="label">Current time</span>
-                        <span class="value">{now.strftime('%d %b %Y • %H:%M:%S')}</span>
-                    </div>
-                    <div class="tw-chip">
-                        <span class="label">Logged in at</span>
-                        <span class="value">{login_at}</span>
-                    </div>
+    col1, col2, col3 = st.columns([2, 3, 2])
+
+    with col1:
+        st.markdown(
+            f"""
+            <div class="tw-header" style="justify-content: flex-start;">
+                <div class="tw-header-name">Hello, {teacher_name}{f' · {role}' if role else ''}</div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+    with col2:
+        st.markdown(
+            f"""
+            <div class="tw-header" style="justify-content: center;">
+                <div class="tw-header-info" style="text-align: center;">
+                    <div><strong>Current:</strong> {now.strftime('%d-%m-%Y %H:%M:%S')}</div>
+                    <div><strong>Logged in:</strong> {login_at}</div>
                 </div>
             </div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
+            """,
+            unsafe_allow_html=True,
+        )
+
+    with col3:
+        save_logout_cols = st.columns(2)
+        with save_logout_cols[0]:
+            if st.button("💾 Save", use_container_width=True, key="header_save_btn"):
+                persist_state(st.session_state.user["username"])
+                st.success("Progress saved!")
+        with save_logout_cols[1]:
+            if st.button("🚪 Logout", use_container_width=True, key="header_logout_btn"):
+                logout_and_rerun("You have been logged out.")
 
 
 def handle_uploads() -> None:
     st.markdown(
         """
-        <div class="tw-card p-4">
-            <div class="flex flex-col gap-4">
-                <div class="flex items-center justify-between flex-wrap gap-3">
-                    <div>
-                        <div class="tw-pill mb-2">Content sources</div>
-                        <h2 class="tw-section-title">Upload workbook links</h2>
-                        <p class="tw-muted text-sm md:text-base">Pull in the bilingual question bank and glossary supplied by the admin.</p>
-                    </div>
-                </div>
+        <div class="tw-card" style="padding: 1rem 1.25rem;">
+            <div style="margin-bottom: 1rem;">
+                <span class="tw-pill">Content sources</span>
+                <h2 class="tw-section-title" style="margin-top: 0.5rem;">Upload workbook links</h2>
+                <p class="tw-muted">Pull in the bilingual question bank and glossary supplied by the admin.</p>
+            </div>
         """,
         unsafe_allow_html=True,
     )
 
-    question_col, glossary_col = st.columns(2, gap="large")
+    question_col, glossary_col = st.columns(2, gap="medium")
 
     with question_col:
         st.markdown('<div class="tw-field-label">Bilingual Q&A workbook (.xlsx)</div>', unsafe_allow_html=True)
-        question_file = st.file_uploader("", type=["xlsx"], label_visibility="collapsed", key="questions_upload")
-        inline = st.columns([1, 1])
-        with inline[1]:
-            if st.button("Load questions", use_container_width=True):
+        upload_row = st.columns([3, 1])
+        with upload_row[0]:
+            question_file = st.file_uploader("", type=["xlsx"], label_visibility="collapsed", key="questions_upload")
+        with upload_row[1]:
+            if st.button("Load questions", use_container_width=True, key="load_questions_btn"):
                 if question_file is not None:
                     qdf = pd.read_excel(question_file)
                     qdf.columns = [col.strip() for col in qdf.columns]
@@ -499,21 +564,21 @@ def handle_uploads() -> None:
                     st.session_state["questions_status"] = "Questions workbook loaded."
                 else:
                     st.session_state["questions_status"] = "Attach the workbook before loading."
-        with inline[0]:
-            status = st.session_state.get("questions_status")
-            if status:
-                tone = "success" if "loaded" in status.lower() else ""
-                st.markdown(
-                    f'<div class="tw-toast {"success" if tone else ""} status">{status}</div>',
-                    unsafe_allow_html=True,
-                )
+        status = st.session_state.get("questions_status")
+        if status:
+            tone = "success" if "loaded" in status.lower() else ""
+            st.markdown(
+                f'<div class="tw-toast {"success" if tone else ""}" style="margin-top: 0.5rem;">{status}</div>',
+                unsafe_allow_html=True,
+            )
 
     with glossary_col:
         st.markdown('<div class="tw-field-label">Glossary workbook (.xlsx)</div>', unsafe_allow_html=True)
-        glossary_file = st.file_uploader("", type=["xlsx"], label_visibility="collapsed", key="glossary_upload")
-        inline = st.columns([1, 1])
-        with inline[1]:
-            if st.button("Load glossary", use_container_width=True):
+        upload_row = st.columns([3, 1])
+        with upload_row[0]:
+            glossary_file = st.file_uploader("", type=["xlsx"], label_visibility="collapsed", key="glossary_upload")
+        with upload_row[1]:
+            if st.button("Load glossary", use_container_width=True, key="load_glossary_btn"):
                 if glossary_file is not None:
                     gdf = pd.read_excel(glossary_file)
                     gdf.columns = [col.strip() for col in gdf.columns]
@@ -522,24 +587,23 @@ def handle_uploads() -> None:
                     st.session_state["glossary_status"] = "Glossary workbook loaded."
                 else:
                     st.session_state["glossary_status"] = "Attach the glossary workbook before loading."
-        with inline[0]:
-            status = st.session_state.get("glossary_status")
-            if status:
-                tone = "success" if "loaded" in status.lower() else ""
-                st.markdown(
-                    f'<div class="tw-toast {"success" if tone else ""} status">{status}</div>',
-                    unsafe_allow_html=True,
-                )
+        status = st.session_state.get("glossary_status")
+        if status:
+            tone = "success" if "loaded" in status.lower() else ""
+            st.markdown(
+                f'<div class="tw-toast {"success" if tone else ""}" style="margin-top: 0.5rem;">{status}</div>',
+                unsafe_allow_html=True,
+            )
 
-    st.markdown("</div></div>", unsafe_allow_html=True)
+    st.markdown("</div>", unsafe_allow_html=True)
 
 
 def render_navigation(question_id: Optional[str], total_rows: int) -> None:
-    st.markdown('<div class="tw-card p-4">', unsafe_allow_html=True)
+    st.markdown('<div class="tw-card" style="padding: 1rem 1.25rem;">', unsafe_allow_html=True)
 
     controls = st.columns([1, 3, 1])
     with controls[0]:
-        if st.button("Previous", key="nav_prev", use_container_width=True, disabled=st.session_state.current_idx <= 0):
+        if st.button("← Previous", key="nav_prev", use_container_width=True, disabled=st.session_state.current_idx <= 0):
             st.session_state.current_idx = max(0, st.session_state.current_idx - 1)
             st.session_state.row_cache_id = None
             _trigger_rerun()
@@ -566,19 +630,10 @@ def render_navigation(question_id: Optional[str], total_rows: int) -> None:
         )
 
     with controls[2]:
-        if st.button("Next", key="nav_next", use_container_width=True, disabled=st.session_state.current_idx >= total_rows - 1):
+        if st.button("Next →", key="nav_next", use_container_width=True, disabled=st.session_state.current_idx >= total_rows - 1):
             st.session_state.current_idx = min(total_rows - 1, st.session_state.current_idx + 1)
             st.session_state.row_cache_id = None
             _trigger_rerun()
-
-    actions = st.columns([1, 1])
-    with actions[0]:
-        if st.button("Save progress", key="save_file_btn", use_container_width=True):
-            persist_state(st.session_state.user["username"])
-            st.success("Progress saved to session storage.")
-    with actions[1]:
-        if st.button("Logout", key="logout_nav_btn", use_container_width=True):
-            logout_and_rerun("You have been logged out.")
 
     st.markdown("</div>", unsafe_allow_html=True)
 
@@ -588,20 +643,21 @@ def render_question_editor(row: pd.Series) -> None:
     cache = st.session_state.row_cache
 
     form_card = st.container()
-    form_card.markdown('<div class="tw-card p-6 mb-6">', unsafe_allow_html=True)
+    form_card.markdown('<div class="tw-card" style="padding: 1rem 1.25rem; margin-bottom: 1rem;">', unsafe_allow_html=True)
 
     with form_card.form("question_editor"):
-        st.markdown('<div class="tw-pill mb-3">Question editor</div>', unsafe_allow_html=True)
-        st.markdown('<h2 class="tw-section-title mb-4">Review bilingual question content</h2>', unsafe_allow_html=True)
+        st.markdown('<span class="tw-pill">Question editor</span>', unsafe_allow_html=True)
+        st.markdown('<h2 class="tw-section-title" style="margin-top: 0.5rem; margin-bottom: 0.75rem;">Review bilingual question content</h2>', unsafe_allow_html=True)
 
-        bilingual_cols = st.columns(2, gap="large")
+        bilingual_cols = st.columns(2, gap="medium")
         with bilingual_cols[0]:
             st.markdown('<div class="tw-field-label">கேள்வி (Tamil)</div>', unsafe_allow_html=True)
             cache["tamil_question"] = st.text_area(
                 "tamil_question_edit",
                 value=cache.get("tamil_question", ""),
                 label_visibility="collapsed",
-                height=110,
+                height=90,
+                key="tamil_q"
             )
         with bilingual_cols[1]:
             st.markdown('<div class="tw-field-label">Question (English)</div>', unsafe_allow_html=True)
@@ -609,31 +665,34 @@ def render_question_editor(row: pd.Series) -> None:
                 "english_question_edit",
                 value=cache.get("question_english", ""),
                 label_visibility="collapsed",
-                height=110,
+                height=90,
+                key="eng_q"
             )
 
-        st.markdown('<div class="tw-field-label mt-4">Options</div>', unsafe_allow_html=True)
+        st.markdown('<div class="tw-field-label" style="margin-top: 0.75rem;">Options</div>', unsafe_allow_html=True)
         option_cols = st.columns(4, gap="small")
         option_labels = ["Option A", "Option B", "Option C", "Option D"]
         option_keys = ["optA", "optB", "optC", "optD"]
         for idx, col in enumerate(option_cols):
             with col:
-                st.markdown(f'<div class="tw-badge mb-2">{option_labels[idx]}</div>', unsafe_allow_html=True)
+                st.markdown(f'<div class="tw-badge" style="margin-bottom: 0.375rem;">{option_labels[idx]}</div>', unsafe_allow_html=True)
                 cache[option_keys[idx]] = st.text_area(
                     f"{option_keys[idx]}_edit",
                     value=cache.get(option_keys[idx], ""),
                     label_visibility="collapsed",
-                    height=70,
+                    height=60,
+                    key=f"opt_{option_keys[idx]}"
                 )
 
-        answer_cols = st.columns(2, gap="large")
+        answer_cols = st.columns(2, gap="medium")
         with answer_cols[0]:
             st.markdown('<div class="tw-field-label">Tamil answer</div>', unsafe_allow_html=True)
             cache["answer_tamil"] = st.text_area(
                 "answer_tamil_edit",
                 value=cache.get("answer_tamil", ""),
                 label_visibility="collapsed",
-                height=80,
+                height=65,
+                key="tamil_ans"
             )
         with answer_cols[1]:
             st.markdown('<div class="tw-field-label">Answer (English)</div>', unsafe_allow_html=True)
@@ -641,44 +700,52 @@ def render_question_editor(row: pd.Series) -> None:
                 "answer_english_edit",
                 value=cache.get("answer_english", ""),
                 label_visibility="collapsed",
-                height=80,
+                height=65,
+                key="eng_ans"
             )
 
-        glossary_cols = st.columns([1, 1], gap="large")
+        glossary_cols = st.columns(2, gap="medium")
         with glossary_cols[0]:
             st.markdown('<div class="tw-field-label">Glossary keyword(s)</div>', unsafe_allow_html=True)
             cache["glossary"] = st.text_area(
                 "glossary_edit",
                 value=cache.get("glossary", ""),
                 label_visibility="collapsed",
-                height=70,
+                height=60,
+                key="glossary_key"
             )
         with glossary_cols[1]:
+            st.markdown('<div class="tw-field-label">Help</div>', unsafe_allow_html=True)
             st.markdown(
-                '<div class="tw-muted text-sm">Link terms to glossary entries. Use commas for multiples.</div>',
+                '<div class="tw-muted" style="margin-top: 0.5rem;">Link terms to glossary entries. Use commas for multiples.</div>',
                 unsafe_allow_html=True,
             )
 
-        st.markdown('<div class="tw-field-label mt-4">விளக்கம் (Tamil)</div>', unsafe_allow_html=True)
-        cache["explanation_tamil"] = st.text_area(
-            "explanation_tamil_edit",
-            value=cache.get("explanation_tamil", ""),
-            label_visibility="collapsed",
-            height=150,
-        )
+        expl_cols = st.columns(2, gap="medium")
+        with expl_cols[0]:
+            st.markdown('<div class="tw-field-label">விளக்கம் (Tamil)</div>', unsafe_allow_html=True)
+            cache["explanation_tamil"] = st.text_area(
+                "explanation_tamil_edit",
+                value=cache.get("explanation_tamil", ""),
+                label_visibility="collapsed",
+                height=100,
+                key="tamil_expl"
+            )
+        with expl_cols[1]:
+            st.markdown('<div class="tw-field-label">Explanation (English)</div>', unsafe_allow_html=True)
+            cache["explanation_english"] = st.text_area(
+                "explanation_english_edit",
+                value=cache.get("explanation_english", ""),
+                label_visibility="collapsed",
+                height=100,
+                key="eng_expl"
+            )
 
-        st.markdown('<div class="tw-field-label">Explanation (English)</div>', unsafe_allow_html=True)
-        cache["explanation_english"] = st.text_area(
-            "explanation_english_edit",
-            value=cache.get("explanation_english", ""),
-            label_visibility="collapsed",
-            height=150,
-        )
-
-        control_cols = st.columns([1, 1, 1], gap="medium")
-        save_continue = control_cols[0].form_submit_button("Save & Continue")
-        save_next = control_cols[1].form_submit_button("Save & Next")
-        save_exit = control_cols[2].form_submit_button("Save & Exit")
+        st.markdown('<div style="margin-top: 1rem;"></div>', unsafe_allow_html=True)
+        control_cols = st.columns([1, 1, 1], gap="small")
+        save_continue = control_cols[0].form_submit_button("Save & Continue", use_container_width=True)
+        save_next = control_cols[1].form_submit_button("Save & Next", use_container_width=True)
+        save_exit = control_cols[2].form_submit_button("Save & Exit", use_container_width=True)
 
         if save_continue:
             st.session_state.row_cache = cache
@@ -704,26 +771,26 @@ def render_reference_block(row: pd.Series, question_id: Optional[str]) -> None:
     eng_answer = row.get(columns.get("answer_english"), "") if columns else ""
     eng_exp = row.get(columns.get("explanation_english"), "") if columns else ""
 
-    st.markdown('<div class="tw-card p-6 mb-6">', unsafe_allow_html=True)
+    st.markdown('<div class="tw-card" style="padding: 1rem 1.25rem; margin-bottom: 1rem;">', unsafe_allow_html=True)
     st.markdown(
         f"""
-        <div class="flex flex-col lg:flex-row gap-6">
+        <div class="flex flex-col lg:flex-row gap-4">
             <div class="flex-1">
-                <div class="tw-pill mb-2">தமிழ் - Reference</div>
-                <div class="space-y-2 text-slate-700">
-                    <div><span class="tw-badge">கேள்வி</span><div class="mt-1">{tamil_question or "—"}</div></div>
-                    <div><span class="tw-badge">விருப்பங்கள்</span><div class="mt-1">{options or "—"}</div></div>
-                    <div><span class="tw-badge">பதில்</span><div class="mt-1">{tamil_answer or "—"}</div></div>
-                    <div><span class="tw-badge">விளக்கம்</span><div class="mt-1">{tamil_exp or "—"}</div></div>
+                <div class="tw-pill" style="margin-bottom: 0.5rem;">தமிழ் - Reference</div>
+                <div style="color: #374151; font-size: 0.875rem;">
+                    <div style="margin-bottom: 0.75rem;"><span class="tw-badge">கேள்வி</span><div style="margin-top: 0.25rem;">{tamil_question or "—"}</div></div>
+                    <div style="margin-bottom: 0.75rem;"><span class="tw-badge">விருப்பங்கள்</span><div style="margin-top: 0.25rem;">{options or "—"}</div></div>
+                    <div style="margin-bottom: 0.75rem;"><span class="tw-badge">பதில்</span><div style="margin-top: 0.25rem;">{tamil_answer or "—"}</div></div>
+                    <div><span class="tw-badge">விளக்கம்</span><div style="margin-top: 0.25rem;">{tamil_exp or "—"}</div></div>
                 </div>
             </div>
             <div class="flex-1">
-                <div class="tw-pill mb-2">English - Reference</div>
-                <div class="space-y-2 text-slate-700">
-                    <div><span class="tw-badge">Question</span><div class="mt-1">{eng_question or "—"}</div></div>
-                    <div><span class="tw-badge">Answer</span><div class="mt-1">{eng_answer or "—"}</div></div>
-                    <div><span class="tw-badge">Explanation</span><div class="mt-1">{eng_exp or "—"}</div></div>
-                    <div><span class="tw-badge">Question ID</span><div class="mt-1">{question_id or "N/A"}</div></div>
+                <div class="tw-pill" style="margin-bottom: 0.5rem;">English - Reference</div>
+                <div style="color: #374151; font-size: 0.875rem;">
+                    <div style="margin-bottom: 0.75rem;"><span class="tw-badge">Question</span><div style="margin-top: 0.25rem;">{eng_question or "—"}</div></div>
+                    <div style="margin-bottom: 0.75rem;"><span class="tw-badge">Answer</span><div style="margin-top: 0.25rem;">{eng_answer or "—"}</div></div>
+                    <div style="margin-bottom: 0.75rem;"><span class="tw-badge">Explanation</span><div style="margin-top: 0.25rem;">{eng_exp or "—"}</div></div>
+                    <div><span class="tw-badge">Question ID</span><div style="margin-top: 0.25rem;">{question_id or "N/A"}</div></div>
                 </div>
             </div>
         </div>
@@ -739,15 +806,13 @@ def render_glossary_editor(question_id: Optional[str]) -> None:
 
     card = st.container()
     with card:
-        st.markdown('<div class="tw-card p-6 mb-10">', unsafe_allow_html=True)
+        st.markdown('<div class="tw-card" style="padding: 1rem 1.25rem; margin-bottom: 1rem;">', unsafe_allow_html=True)
         st.markdown(
             """
-            <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-5">
-                <div>
-                    <div class="tw-pill mb-3">Glossary</div>
-                    <h2 class="tw-section-title mb-2">Curate supporting terminology</h2>
-                    <p class="tw-muted">Add, edit, or remove glossary entries associated with this question ID.</p>
-                </div>
+            <div style="margin-bottom: 1rem;">
+                <span class="tw-pill">Glossary</span>
+                <h2 class="tw-section-title" style="margin-top: 0.5rem;">Curate supporting terminology</h2>
+                <p class="tw-muted">Add, edit, or remove glossary entries associated with this question ID.</p>
             </div>
             """,
             unsafe_allow_html=True,
@@ -787,7 +852,7 @@ def render_glossary_editor(question_id: Optional[str]) -> None:
 
     action_cols = st.columns([1, 3])
     with action_cols[0]:
-        if st.button("Save glossary changes", key=f"save_glossary_{question_id or 'new'}"):
+        if st.button("Save glossary changes", key=f"save_glossary_{question_id or 'new'}", use_container_width=True):
             edited[id_col] = edited[id_col].fillna(question_id or "")
             edited[term_col] = edited[term_col].fillna("")
             edited[definition_col] = edited[definition_col].fillna("")
