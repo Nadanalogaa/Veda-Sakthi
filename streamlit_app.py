@@ -36,7 +36,7 @@ def inject_tailwind_theme() -> None:
         .app-header {
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
-            padding: 1rem 2rem;
+            padding: 0.5rem 1.5rem;
             display: grid;
             grid-template-columns: 2fr 3fr 2fr;
             align-items: center;
@@ -44,13 +44,13 @@ def inject_tailwind_theme() -> None:
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        .header-left { font-size: 1.125rem; font-weight: 600; }
+        .header-left { font-size: 1rem; font-weight: 600; }
         .header-center {
-            font-size: 0.875rem;
+            font-size: 0.8rem;
             text-align: center;
             display: flex;
             flex-direction: column;
-            gap: 0.25rem;
+            gap: 0.1rem;
         }
         .header-right {
             display: flex;
@@ -58,13 +58,13 @@ def inject_tailwind_theme() -> None:
             justify-content: flex-end;
         }
         .header-btn {
-            padding: 0.5rem 1rem;
+            padding: 0.4rem 0.8rem;
             border-radius: 6px;
             border: 1px solid rgba(255,255,255,0.3);
             background: rgba(255,255,255,0.1);
             color: white;
             font-weight: 600;
-            font-size: 0.875rem;
+            font-size: 0.8rem;
             cursor: pointer;
             transition: all 0.2s;
         }
@@ -76,34 +76,34 @@ def inject_tailwind_theme() -> None:
         .content-wrapper {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 0.75rem 1.5rem;
         }
 
         /* Upload Section - Clean */
         .upload-area {
             background: white;
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            margin-bottom: 0.75rem;
             border: 1px solid var(--border);
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 2rem;
+            gap: 1.5rem;
         }
 
         .upload-label {
             font-weight: 600;
             color: var(--text);
-            font-size: 0.875rem;
-            margin-bottom: 0.5rem;
+            font-size: 0.8rem;
+            margin-bottom: 0.375rem;
         }
 
         /* Navigation - Clean Bar */
         .nav-bar {
             background: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            margin-bottom: 0.75rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -112,9 +112,9 @@ def inject_tailwind_theme() -> None:
 
         .nav-info {
             display: flex;
-            gap: 2rem;
+            gap: 1.5rem;
             align-items: center;
-            font-size: 0.875rem;
+            font-size: 0.8rem;
             color: var(--text);
         }
 
@@ -125,75 +125,75 @@ def inject_tailwind_theme() -> None:
         .nav-info-text strong {
             color: var(--text-light);
             font-weight: 600;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
         }
 
         /* Editor Section - Clean Panel */
         .editor-panel {
             background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            margin-bottom: 2rem;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 0.75rem;
             border: 1px solid var(--border);
         }
 
         .panel-header {
-            font-size: 1.125rem;
+            font-size: 1rem;
             font-weight: 600;
             color: var(--text);
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.75rem;
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.5rem;
             border-bottom: 2px solid var(--primary);
         }
 
         .field-label {
             font-weight: 600;
             color: var(--text);
-            margin-bottom: 0.5rem;
-            font-size: 0.875rem;
+            margin-bottom: 0.375rem;
+            font-size: 0.8rem;
         }
 
         .field-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
+            gap: 1rem;
+            margin-bottom: 0.75rem;
         }
 
         .field-row-4 {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 1rem;
-            margin-bottom: 1.5rem;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
         }
 
         /* Reference Section */
         .reference-panel {
             background: #FAFBFC;
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin-bottom: 2rem;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 0.75rem;
             border: 1px solid var(--border);
         }
 
         .reference-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 2rem;
+            gap: 1.5rem;
         }
 
         .reference-col h4 {
-            font-size: 0.875rem;
+            font-size: 0.8rem;
             font-weight: 600;
             color: var(--primary);
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
             text-transform: uppercase;
         }
 
         .ref-item {
-            margin-bottom: 1rem;
-            padding-bottom: 1rem;
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.5rem;
             border-bottom: 1px solid var(--border);
         }
 
@@ -202,16 +202,16 @@ def inject_tailwind_theme() -> None:
         }
 
         .ref-label {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: var(--text-light);
             text-transform: uppercase;
             font-weight: 600;
-            margin-bottom: 0.25rem;
+            margin-bottom: 0.2rem;
         }
 
         .ref-value {
             color: var(--text);
-            font-size: 0.875rem;
+            font-size: 0.8rem;
         }
 
         /* Form Fields */
@@ -232,14 +232,14 @@ def inject_tailwind_theme() -> None:
         /* Buttons */
         .stButton>button {
             border-radius: 6px !important;
-            padding: 0.5rem 1rem !important;
+            padding: 0.4rem 0.8rem !important;
             border: none !important;
             font-weight: 600 !important;
-            font-size: 0.875rem !important;
+            font-size: 0.8rem !important;
             background: linear-gradient(135deg, var(--primary), var(--primary-dark)) !important;
             color: white !important;
             transition: all 0.2s !important;
-            min-height: 38px !important;
+            min-height: 32px !important;
         }
 
         .stButton>button:hover {
