@@ -227,7 +227,7 @@ def apply_question_updates(action: str) -> None:
     if action == "next":
         st.session_state.current_idx = min(idx + 1, len(qdf) - 1)
         st.session_state.row_cache_id = None
-        st.experimental_rerun()
+        _trigger_rerun()
     if action == "exit":
         logout_and_rerun("Progress saved. Please log in again to continue.")
 
@@ -294,7 +294,7 @@ def render_navigation(question_id: Optional[str], total_rows: int) -> None:
         if st.button("Previous", disabled=st.session_state.current_idx <= 0):
             st.session_state.current_idx = max(0, st.session_state.current_idx - 1)
             st.session_state.row_cache_id = None
-            st.experimental_rerun()
+            _trigger_rerun()
 
     with nav_cols[1]:
         st.markdown(f"**Row # A**<br>{st.session_state.current_idx + 1}", unsafe_allow_html=True)
@@ -309,7 +309,7 @@ def render_navigation(question_id: Optional[str], total_rows: int) -> None:
         if st.button("Next", disabled=st.session_state.current_idx >= total_rows - 1):
             st.session_state.current_idx = min(total_rows - 1, st.session_state.current_idx + 1)
             st.session_state.row_cache_id = None
-            st.experimental_rerun()
+            _trigger_rerun()
 
     with nav_cols[5]:
         if st.button("Save File"):
