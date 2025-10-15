@@ -21,14 +21,26 @@ def inject_tailwind_theme() -> None:
             --brand-border: #e2e8f0;
             --brand-text: #0f172a;
         }
-        body, .block-container {
+        html, body {
             background: var(--brand-surface);
+        }
+        .block-container {
+            padding: 0 !important;
+        }
+        .tw-shell {
+            max-width: 1160px;
+            margin: 0 auto;
+            padding: 1.5rem 1.75rem 3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
         }
         .tw-card {
             background: var(--brand-card);
             border-radius: 1rem;
             border: 1px solid var(--brand-border);
             box-shadow: 0 24px 48px -32px rgba(15, 23, 42, 0.35);
+            width: 100%;
         }
         .tw-pill {
             display: inline-flex;
@@ -44,7 +56,7 @@ def inject_tailwind_theme() -> None:
             letter-spacing: 0.08em;
         }
         .tw-section-title {
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             font-weight: 600;
             color: #0f172a;
         }
@@ -56,8 +68,12 @@ def inject_tailwind_theme() -> None:
             border-radius: 0.95rem;
             border: 1px solid var(--brand-border);
             background: #f1f5f9;
-            padding: 0.7rem 1rem;
+            padding: 0.5rem 0.9rem;
             box-shadow: 0 18px 32px -28px rgba(15, 23, 42, 0.35);
+            display: inline-flex;
+            flex-direction: column;
+            justify-content: center;
+            min-width: 145px;
         }
         .tw-chip .label {
             display: block;
@@ -73,20 +89,22 @@ def inject_tailwind_theme() -> None:
             font-size: 1rem;
             font-weight: 600;
             color: #0f172a;
+            line-height: 1.25;
         }
         .tw-field-label {
             font-weight: 600;
             color: #1e293b;
-            margin-bottom: 0.45rem;
-            font-size: 0.95rem;
+            margin-bottom: 0.35rem;
+            font-size: 0.92rem;
         }
         .tw-toast {
             border-radius: 0.9rem;
-            padding: 0.6rem 0.95rem;
+            padding: 0.55rem 0.85rem;
             font-weight: 500;
             display: inline-flex;
             align-items: center;
             gap: 0.45rem;
+            font-size: 0.9rem;
         }
         .tw-toast.success {
             background: rgba(34, 197, 94, 0.12);
@@ -107,11 +125,11 @@ def inject_tailwind_theme() -> None:
             border-radius: 0.85rem !important;
             border: 1px solid var(--brand-border) !important;
             background: #f1f5f9 !important;
-            padding: 0.9rem 1.1rem !important;
-            font-size: 1rem !important;
+            padding: 0.75rem 1rem !important;
+            font-size: 0.95rem !important;
             color: var(--brand-text);
             height: auto !important;
-            min-height: 120px !important;
+            min-height: 72px !important;
         }
         .stTextArea textarea:focus, .stTextInput input:focus, .stNumberInput input:focus {
             border-color: rgba(28, 100, 242, 0.7) !important;
@@ -128,6 +146,7 @@ def inject_tailwind_theme() -> None:
             color: white;
             transition: transform 0.12s ease, box-shadow 0.2s ease;
             width: 100%;
+            min-height: 44px;
         }
         .stButton>button:hover {
             transform: translateY(-1px);
@@ -144,7 +163,18 @@ def inject_tailwind_theme() -> None:
             overflow: hidden;
             box-shadow: 0 18px 28px -25px rgba(15, 23, 42, 0.18);
         }
+        .tw-inline-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+        .tw-inline-actions .status {
+            flex: 1 1 auto;
+            min-width: 200px;
+        }
         header, footer {visibility: hidden;}
+        #MainMenu {display: none;}
         </style>
         """,
         unsafe_allow_html=True,
@@ -405,18 +435,20 @@ def render_top_banner() -> None:
 
     st.markdown(
         f"""
-        <div class="tw-card p-6 mb-6">
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-                <div>
-                    <div class="tw-pill mb-3">SME Workspace</div>
-                    <h1 class="text-2xl md:text-3xl font-semibold text-slate-900 mb-2">
-                        Hello, {teacher_name}{f' · {role}' if role else ''}
-                    </h1>
-                    <p class="tw-muted">
-                        Continue refining questions, answers, and glossary entries for your bilingual content set.
-                    </p>
+        <div class="tw-card p-4">
+            <div class="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+                <div class="flex items-center gap-3 flex-wrap">
+                    <div class="flex flex-col gap-1">
+                        <div class="tw-pill">SME Workspace</div>
+                        <h1 class="text-xl md:text-2xl font-semibold text-slate-900 leading-tight">
+                            Hello, {teacher_name}{f' · {role}' if role else ''}
+                        </h1>
+                        <p class="tw-muted text-sm md:text-base">
+                            Manage bilingual questions, answers, and glossary notes in a single streamlined view.
+                        </p>
+                    </div>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 w-full md:w-auto">
+                <div class="tw-inline-actions">
                     <div class="tw-chip">
                         <span class="label">Current time</span>
                         <span class="value">{now.strftime('%d %b %Y • %H:%M:%S')}</span>
@@ -434,30 +466,30 @@ def render_top_banner() -> None:
 
 
 def handle_uploads() -> None:
-    upload_card = st.container()
-    upload_card.markdown(
+    st.markdown(
         """
-        <div class="tw-card p-6 mb-6">
-            <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 mb-6">
-                <div>
-                    <div class="tw-pill mb-3">Content sources</div>
-                    <h2 class="tw-section-title mb-2">Upload workbook links</h2>
-                    <p class="tw-muted">Bring in the latest bilingual question bank and glossary provided by the admin.</p>
+        <div class="tw-card p-4">
+            <div class="flex flex-col gap-4">
+                <div class="flex items-center justify-between flex-wrap gap-3">
+                    <div>
+                        <div class="tw-pill mb-2">Content sources</div>
+                        <h2 class="tw-section-title">Upload workbook links</h2>
+                        <p class="tw-muted text-sm md:text-base">Pull in the bilingual question bank and glossary supplied by the admin.</p>
+                    </div>
                 </div>
-            </div>
         """,
         unsafe_allow_html=True,
     )
 
-    question_col, glossary_col = upload_card.columns(2, gap="large")
+    question_col, glossary_col = st.columns(2, gap="large")
 
     with question_col:
-        upload_card.markdown('<div class="tw-field-label">Bilingual Q&A workbook (.xlsx)</div>', unsafe_allow_html=True)
-        question_file = st.file_uploader("Bilingual workbook", type=["xlsx"], key="questions_upload")
-        q_controls = st.columns([1, 1])
-        with q_controls[0]:
-            if st.button("Load questions", key="load_questions"):
-                if question_file:
+        st.markdown('<div class="tw-field-label">Bilingual Q&A workbook (.xlsx)</div>', unsafe_allow_html=True)
+        question_file = st.file_uploader("", type=["xlsx"], label_visibility="collapsed", key="questions_upload")
+        inline = st.columns([1, 1])
+        with inline[1]:
+            if st.button("Load questions", use_container_width=True):
+                if question_file is not None:
                     qdf = pd.read_excel(question_file)
                     qdf.columns = [col.strip() for col in qdf.columns]
                     st.session_state.question_df = qdf
@@ -466,88 +498,89 @@ def handle_uploads() -> None:
                     st.session_state.row_cache_id = None
                     st.session_state["questions_status"] = "Questions workbook loaded."
                 else:
-                    st.session_state["questions_status"] = "Please attach the workbook before loading."
-        with q_controls[1]:
+                    st.session_state["questions_status"] = "Attach the workbook before loading."
+        with inline[0]:
             status = st.session_state.get("questions_status")
             if status:
                 tone = "success" if "loaded" in status.lower() else ""
                 st.markdown(
-                    f'<div class="tw-toast {"success" if tone else ""}">{status}</div>',
+                    f'<div class="tw-toast {"success" if tone else ""} status">{status}</div>',
                     unsafe_allow_html=True,
                 )
 
     with glossary_col:
-        upload_card.markdown('<div class="tw-field-label">Glossary workbook (.xlsx)</div>', unsafe_allow_html=True)
-        glossary_file = st.file_uploader("Glossary workbook", type=["xlsx"], key="glossary_upload")
-        g_controls = st.columns([1, 1])
-        with g_controls[0]:
-            if st.button("Load glossary", key="load_glossary"):
-                if glossary_file:
+        st.markdown('<div class="tw-field-label">Glossary workbook (.xlsx)</div>', unsafe_allow_html=True)
+        glossary_file = st.file_uploader("", type=["xlsx"], label_visibility="collapsed", key="glossary_upload")
+        inline = st.columns([1, 1])
+        with inline[1]:
+            if st.button("Load glossary", use_container_width=True):
+                if glossary_file is not None:
                     gdf = pd.read_excel(glossary_file)
                     gdf.columns = [col.strip() for col in gdf.columns]
                     st.session_state.glossary_df = gdf
                     st.session_state.glossary_columns = resolve_columns(gdf, GLOSSARY_COLUMN_CANDIDATES)
                     st.session_state["glossary_status"] = "Glossary workbook loaded."
                 else:
-                    st.session_state["glossary_status"] = "Please attach the glossary workbook before loading."
-        with g_controls[1]:
+                    st.session_state["glossary_status"] = "Attach the glossary workbook before loading."
+        with inline[0]:
             status = st.session_state.get("glossary_status")
             if status:
                 tone = "success" if "loaded" in status.lower() else ""
                 st.markdown(
-                    f'<div class="tw-toast {"success" if tone else ""}">{status}</div>',
+                    f'<div class="tw-toast {"success" if tone else ""} status">{status}</div>',
                     unsafe_allow_html=True,
                 )
 
-    upload_card.markdown("</div>", unsafe_allow_html=True)
+    st.markdown("</div></div>", unsafe_allow_html=True)
 
 
 def render_navigation(question_id: Optional[str], total_rows: int) -> None:
-    nav_card = st.container()
-    nav_card.markdown('<div class="tw-card p-4 mb-6">', unsafe_allow_html=True)
+    st.markdown('<div class="tw-card p-4">', unsafe_allow_html=True)
 
-    controls = nav_card.columns([1, 3, 1])
+    controls = st.columns([1, 3, 1])
     with controls[0]:
-        if st.button("Previous", key="nav_prev", disabled=st.session_state.current_idx <= 0):
+        if st.button("Previous", key="nav_prev", use_container_width=True, disabled=st.session_state.current_idx <= 0):
             st.session_state.current_idx = max(0, st.session_state.current_idx - 1)
             st.session_state.row_cache_id = None
             _trigger_rerun()
 
     with controls[1]:
-        chips_html = f"""
-        <div class="flex flex-wrap items-center justify-center gap-3">
-            <div class="tw-chip">
-                <span class="label">Current Row</span>
-                <span class="value">{st.session_state.current_idx + 1}</span>
+        st.markdown(
+            f"""
+            <div class="flex flex-wrap justify-center gap-3">
+                <div class="tw-chip">
+                    <span class="label">Current row</span>
+                    <span class="value">{st.session_state.current_idx + 1}</span>
+                </div>
+                <div class="tw-chip">
+                    <span class="label">Question ID</span>
+                    <span class="value">{question_id or "N/A"}</span>
+                </div>
+                <div class="tw-chip">
+                    <span class="label">Total rows</span>
+                    <span class="value">{total_rows}</span>
+                </div>
             </div>
-            <div class="tw-chip">
-                <span class="label">Question ID</span>
-                <span class="value">{question_id or "N/A"}</span>
-            </div>
-            <div class="tw-chip">
-                <span class="label">Total Rows</span>
-                <span class="value">{total_rows}</span>
-            </div>
-        </div>
-        """
-        nav_card.markdown(chips_html, unsafe_allow_html=True)
+            """,
+            unsafe_allow_html=True,
+        )
 
     with controls[2]:
-        if st.button("Next", key="nav_next", disabled=st.session_state.current_idx >= total_rows - 1):
+        if st.button("Next", key="nav_next", use_container_width=True, disabled=st.session_state.current_idx >= total_rows - 1):
             st.session_state.current_idx = min(total_rows - 1, st.session_state.current_idx + 1)
             st.session_state.row_cache_id = None
             _trigger_rerun()
 
-    actions = nav_card.columns([2, 1, 1])
-    with actions[1]:
-        if st.button("Save Progress", key="save_file_btn"):
+    actions = st.columns([1, 1])
+    with actions[0]:
+        if st.button("Save progress", key="save_file_btn", use_container_width=True):
             persist_state(st.session_state.user["username"])
             st.success("Progress saved to session storage.")
-    with actions[2]:
-        if st.button("Logout", key="logout_nav_btn"):
+    with actions[1]:
+        if st.button("Logout", key="logout_nav_btn", use_container_width=True):
             logout_and_rerun("You have been logged out.")
 
-    nav_card.markdown("</div>", unsafe_allow_html=True)
+    st.markdown("</div>", unsafe_allow_html=True)
 
 
 def render_question_editor(row: pd.Series) -> None:
@@ -568,6 +601,7 @@ def render_question_editor(row: pd.Series) -> None:
                 "tamil_question_edit",
                 value=cache.get("tamil_question", ""),
                 label_visibility="collapsed",
+                height=110,
             )
         with bilingual_cols[1]:
             st.markdown('<div class="tw-field-label">Question (English)</div>', unsafe_allow_html=True)
@@ -575,6 +609,7 @@ def render_question_editor(row: pd.Series) -> None:
                 "english_question_edit",
                 value=cache.get("question_english", ""),
                 label_visibility="collapsed",
+                height=110,
             )
 
         st.markdown('<div class="tw-field-label mt-4">Options</div>', unsafe_allow_html=True)
@@ -588,6 +623,7 @@ def render_question_editor(row: pd.Series) -> None:
                     f"{option_keys[idx]}_edit",
                     value=cache.get(option_keys[idx], ""),
                     label_visibility="collapsed",
+                    height=70,
                 )
 
         answer_cols = st.columns(2, gap="large")
@@ -597,6 +633,7 @@ def render_question_editor(row: pd.Series) -> None:
                 "answer_tamil_edit",
                 value=cache.get("answer_tamil", ""),
                 label_visibility="collapsed",
+                height=80,
             )
         with answer_cols[1]:
             st.markdown('<div class="tw-field-label">Answer (English)</div>', unsafe_allow_html=True)
@@ -604,6 +641,7 @@ def render_question_editor(row: pd.Series) -> None:
                 "answer_english_edit",
                 value=cache.get("answer_english", ""),
                 label_visibility="collapsed",
+                height=80,
             )
 
         glossary_cols = st.columns([1, 1], gap="large")
@@ -613,6 +651,7 @@ def render_question_editor(row: pd.Series) -> None:
                 "glossary_edit",
                 value=cache.get("glossary", ""),
                 label_visibility="collapsed",
+                height=70,
             )
         with glossary_cols[1]:
             st.markdown(
@@ -625,6 +664,7 @@ def render_question_editor(row: pd.Series) -> None:
             "explanation_tamil_edit",
             value=cache.get("explanation_tamil", ""),
             label_visibility="collapsed",
+            height=150,
         )
 
         st.markdown('<div class="tw-field-label">Explanation (English)</div>', unsafe_allow_html=True)
@@ -632,6 +672,7 @@ def render_question_editor(row: pd.Series) -> None:
             "explanation_english_edit",
             value=cache.get("explanation_english", ""),
             label_visibility="collapsed",
+            height=150,
         )
 
         control_cols = st.columns([1, 1, 1], gap="medium")
@@ -737,31 +778,31 @@ def render_glossary_editor(question_id: Optional[str]) -> None:
     if matching_rows.empty:
         matching_rows = pd.DataFrame([{id_col: question_id or "", term_col: "", definition_col: ""}])
 
-        edited = st.data_editor(
-            matching_rows.reset_index(drop=True),
-            num_rows="dynamic",
-            use_container_width=True,
-            key=f"glossary_editor_{question_id or 'new'}",
-        )
+    edited = st.data_editor(
+        matching_rows.reset_index(drop=True),
+        num_rows="dynamic",
+        use_container_width=True,
+        key=f"glossary_editor_{question_id or 'new'}",
+    )
 
-        action_cols = st.columns([1, 3])
-        with action_cols[0]:
-            if st.button("Save glossary changes", key=f"save_glossary_{question_id or 'new'}"):
-                edited[id_col] = edited[id_col].fillna(question_id or "")
-                edited[term_col] = edited[term_col].fillna("")
-                edited[definition_col] = edited[definition_col].fillna("")
+    action_cols = st.columns([1, 3])
+    with action_cols[0]:
+        if st.button("Save glossary changes", key=f"save_glossary_{question_id or 'new'}"):
+            edited[id_col] = edited[id_col].fillna(question_id or "")
+            edited[term_col] = edited[term_col].fillna("")
+            edited[definition_col] = edited[definition_col].fillna("")
 
-                if question_id:
-                    glossary_df = glossary_df[glossary_df[id_col].astype(str) != question_id]
-                    glossary_df = pd.concat([glossary_df, edited], ignore_index=True)
-                else:
-                    glossary_df = pd.concat([glossary_df, edited], ignore_index=True)
+            if question_id:
+                glossary_df = glossary_df[glossary_df[id_col].astype(str) != question_id]
+                glossary_df = pd.concat([glossary_df, edited], ignore_index=True)
+            else:
+                glossary_df = pd.concat([glossary_df, edited], ignore_index=True)
 
-                st.session_state.glossary_df = glossary_df
-                persist_state(st.session_state.user["username"])
-                st.success("Glossary updated.")
+            st.session_state.glossary_df = glossary_df
+            persist_state(st.session_state.user["username"])
+            st.success("Glossary updated.")
 
-        st.markdown("</div>", unsafe_allow_html=True)
+    st.markdown("</div>", unsafe_allow_html=True)
 
 
 # --- Main application flow -----------------------------------------------------------
@@ -769,37 +810,41 @@ def render_glossary_editor(question_id: Optional[str]) -> None:
 def main() -> None:
     st.set_page_config(page_title="SME Review Tool", layout="wide")
     inject_tailwind_theme()
+    st.markdown('<div class="tw-shell">', unsafe_allow_html=True)
 
-    if st.session_state.get("flash_message"):
-        st.success(st.session_state.pop("flash_message"))
+    try:
+        if st.session_state.get("flash_message"):
+            st.success(st.session_state.pop("flash_message"))
 
-    user = st.session_state.get("user")
-    if not user:
-        render_login()
-        return
+        user = st.session_state.get("user")
+        if not user:
+            render_login()
+            return
 
-    bootstrap_state_from_disk(user["username"])
-    render_top_banner()
-    handle_uploads()
+        bootstrap_state_from_disk(user["username"])
+        render_top_banner()
+        handle_uploads()
 
-    question_df: Optional[pd.DataFrame] = st.session_state.get("question_df")
+        question_df: Optional[pd.DataFrame] = st.session_state.get("question_df")
 
-    if question_df is None or question_df.empty:
-        st.info("Upload the bilingual questions workbook to begin reviewing.")
-        return
+        if question_df is None or question_df.empty:
+            st.info("Upload the bilingual questions workbook to begin reviewing.")
+            return
 
-    if st.session_state.get("question_columns") is None:
-        st.session_state.question_columns = resolve_columns(question_df, QUESTION_COLUMN_CANDIDATES)
+        if st.session_state.get("question_columns") is None:
+            st.session_state.question_columns = resolve_columns(question_df, QUESTION_COLUMN_CANDIDATES)
 
-    row, question_id = current_row_and_id()
-    if row is None:
-        st.warning("No rows found in the uploaded workbook.")
-        return
+        row, question_id = current_row_and_id()
+        if row is None:
+            st.warning("No rows found in the uploaded workbook.")
+            return
 
-    render_navigation(question_id, len(question_df))
-    render_question_editor(row)
-    render_reference_block(row, question_id)
-    render_glossary_editor(question_id)
+        render_navigation(question_id, len(question_df))
+        render_question_editor(row)
+        render_reference_block(row, question_id)
+        render_glossary_editor(question_id)
+    finally:
+        st.markdown("</div>", unsafe_allow_html=True)
 
 
 if __name__ == "__main__":
