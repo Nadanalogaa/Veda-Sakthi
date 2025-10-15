@@ -709,11 +709,11 @@ def render_question_editor(row: pd.Series) -> None:
 
         # Questions
         st.markdown('<div class="field-row">', unsafe_allow_html=True)
-       col1, col2 = st.columns(2)
-       with col1:
+        col1, col2 = st.columns(2)
+        with col1:
             st.markdown('<div class="field-label">கேள்வி (Tamil)</div>', unsafe_allow_html=True)
             cache["tamil_question"] = st.text_area("", value=cache.get("tamil_question", ""), height=90, key="tamil_q", label_visibility="collapsed")
-       with col2:
+        with col2:
             st.markdown('<div class="field-label">Question (English)</div>', unsafe_allow_html=True)
             cache["question_english"] = st.text_area(
                 "",
