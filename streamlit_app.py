@@ -120,12 +120,20 @@ def store_login_state(username: str) -> None:
     st.session_state.state_loaded = False
 
 
+def _trigger_rerun() -> None:
+    """Compatibility helper for rerunning the Streamlit script."""
+    rerun_fn = getattr(st, "rerun", None)
+    if rerun_fn is None:
+        rerun_fn = getattr(st, "experimental_rerun")
+    rerun_fn()
+
+
 def logout_and_rerun(message: str) -> None:
     username = st.session_state.user["username"]
     persist_state(username)
     st.session_state.clear()
     st.session_state["flash_message"] = message
-    st.experimental_rerun()
+    _trigger_rerun()
 
 
 def normalize_options_from_row(raw_options: str) -> Dict[str, str]:
@@ -237,7 +245,7 @@ def render_login() -> bool:
             st.error("Invalid credentials. Please try again.")
         else:
             store_login_state(username)
-            st.experimental_rerun()
+            _trigger_rerun()
     return False
 
 
