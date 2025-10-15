@@ -709,13 +709,20 @@ def render_question_editor(row: pd.Series) -> None:
 
         # Questions
         st.markdown('<div class="field-row">', unsafe_allow_html=True)
-        col1, col2 = st.columns(2)
-        with col1:
+       col1, col2 = st.columns(2)
+       with col1:
             st.markdown('<div class="field-label">கேள்வி (Tamil)</div>', unsafe_allow_html=True)
             cache["tamil_question"] = st.text_area("", value=cache.get("tamil_question", ""), height=90, key="tamil_q", label_visibility="collapsed")
-        with col2:
+       with col2:
             st.markdown('<div class="field-label">Question (English)</div>', unsafe_allow_html=True)
-            cache["question_english"] = st.text_area("", value=cache.get("question_english", ""), height=90, key="eng_q", label_visibility="collapsed")
+            cache["question_english"] = st.text_area(
+                "",
+                value=cache.get("question_english", ""),
+                height=90,
+                key="eng_q",
+                label_visibility="collapsed",
+                disabled=True,
+            )
         st.markdown('</div>', unsafe_allow_html=True)
 
         # Options
@@ -737,7 +744,14 @@ def render_question_editor(row: pd.Series) -> None:
             cache["answer_tamil"] = st.text_area("", value=cache.get("answer_tamil", ""), height=65, key="tamil_ans", label_visibility="collapsed")
         with ans2:
             st.markdown('<div class="field-label">Answer (English)</div>', unsafe_allow_html=True)
-            cache["answer_english"] = st.text_area("", value=cache.get("answer_english", ""), height=65, key="eng_ans", label_visibility="collapsed")
+            cache["answer_english"] = st.text_area(
+                "",
+                value=cache.get("answer_english", ""),
+                height=65,
+                key="eng_ans",
+                label_visibility="collapsed",
+                disabled=True,
+            )
         st.markdown('</div>', unsafe_allow_html=True)
 
         # Glossary
@@ -752,7 +766,14 @@ def render_question_editor(row: pd.Series) -> None:
             cache["explanation_tamil"] = st.text_area("", value=cache.get("explanation_tamil", ""), height=100, key="tamil_expl", label_visibility="collapsed")
         with exp2:
             st.markdown('<div class="field-label">Explanation (English)</div>', unsafe_allow_html=True)
-            cache["explanation_english"] = st.text_area("", value=cache.get("explanation_english", ""), height=100, key="eng_expl", label_visibility="collapsed")
+            cache["explanation_english"] = st.text_area(
+                "",
+                value=cache.get("explanation_english", ""),
+                height=100,
+                key="eng_expl",
+                label_visibility="collapsed",
+                disabled=True,
+            )
         st.markdown('</div>', unsafe_allow_html=True)
 
         # Action buttons
