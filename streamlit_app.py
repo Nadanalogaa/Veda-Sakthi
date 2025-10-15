@@ -37,15 +37,40 @@ def inject_tailwind_theme() -> None:
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
             padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
+            display: grid;
+            grid-template-columns: 2fr 3fr 2fr;
             align-items: center;
+            gap: 1rem;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .header-left { font-size: 1.125rem; font-weight: 600; }
-        .header-center { font-size: 0.875rem; text-align: center; }
-        .header-right { display: flex; gap: 0.5rem; }
+        .header-center {
+            font-size: 0.875rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+        .header-right {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: flex-end;
+        }
+        .header-btn {
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            border: 1px solid rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-weight: 600;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .header-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
 
         /* Content Area */
         .content-wrapper {
@@ -59,53 +84,26 @@ def inject_tailwind_theme() -> None:
             background: white;
             padding: 1.5rem;
             border-radius: 8px;
-            margin-bottom: 2rem;
-            border: 1px solid var(--border);
-        }
-
-        .upload-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--text);
-            margin-bottom: 0.5rem;
-        }
-
-        .upload-desc {
-            color: var(--text-light);
-            font-size: 0.875rem;
             margin-bottom: 1.5rem;
-        }
-
-        .upload-grid {
+            border: 1px solid var(--border);
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 2rem;
-        }
-
-        .upload-item {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
         }
 
         .upload-label {
             font-weight: 600;
             color: var(--text);
             font-size: 0.875rem;
-        }
-
-        .upload-controls {
-            display: flex;
-            gap: 0.75rem;
-            align-items: flex-end;
+            margin-bottom: 0.5rem;
         }
 
         /* Navigation - Clean Bar */
         .nav-bar {
             background: white;
-            padding: 1rem 1.5rem;
+            padding: 0.75rem 1.5rem;
             border-radius: 8px;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -114,26 +112,21 @@ def inject_tailwind_theme() -> None:
 
         .nav-info {
             display: flex;
-            gap: 1.5rem;
+            gap: 2rem;
             align-items: center;
-        }
-
-        .info-item {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .info-label {
-            font-size: 0.75rem;
-            color: var(--text-light);
-            text-transform: uppercase;
-            font-weight: 600;
-        }
-
-        .info-value {
-            font-size: 1rem;
+            font-size: 0.875rem;
             color: var(--text);
+        }
+
+        .nav-info-text {
+            font-weight: 500;
+        }
+
+        .nav-info-text strong {
+            color: var(--text-light);
             font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
         }
 
         /* Editor Section - Clean Panel */
@@ -260,12 +253,8 @@ def inject_tailwind_theme() -> None:
         }
 
         /* Login Page */
-        .login-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        body[data-testid="stAppViewContainer"] {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark)) !important;
         }
 
         .login-box {
@@ -274,7 +263,7 @@ def inject_tailwind_theme() -> None:
             border-radius: 12px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             max-width: 400px;
-            width: 100%;
+            margin: 10vh auto;
         }
 
         .login-title {
@@ -546,9 +535,7 @@ def apply_question_updates(action: str) -> None:
 
 
 def render_login() -> bool:
-    st.markdown('<div class="login-container">', unsafe_allow_html=True)
-
-    col1, col2, col3 = st.columns([1, 2, 1])
+    _, col2, _ = st.columns([1, 2, 1])
     with col2:
         st.markdown('<div class="login-box">', unsafe_allow_html=True)
         st.markdown('<h1 class="login-title">SME Review Portal</h1>', unsafe_allow_html=True)
@@ -569,8 +556,6 @@ def render_login() -> bool:
                 _trigger_rerun()
 
         st.markdown('</div>', unsafe_allow_html=True)
-
-    st.markdown('</div>', unsafe_allow_html=True)
     return False
 
 
@@ -581,42 +566,44 @@ def render_top_banner() -> None:
     login_at = user.get("login_at", "—")
     role = user.get("role", "")
 
-    st.markdown(
-        f'''<div class="app-header">
-            <div class="header-left">Hello, {teacher_name} · {role}</div>
-            <div class="header-center">
+    # Create columns for header layout
+    col_left, col_center, col_right = st.columns([2, 3, 2])
+
+    with col_left:
+        st.markdown(
+            f'<div class="header-left">Hello, {teacher_name} · {role}</div>',
+            unsafe_allow_html=True
+        )
+
+    with col_center:
+        st.markdown(
+            f'''<div class="header-center">
                 <div><strong>Current:</strong> {now.strftime('%d-%m-%Y %H:%M:%S')}</div>
                 <div><strong>Logged in:</strong> {login_at}</div>
-            </div>
-            <div class="header-right" id="header-buttons"></div>
-        </div>''',
-        unsafe_allow_html=True
-    )
+            </div>''',
+            unsafe_allow_html=True
+        )
 
-    # Buttons in header
-    _, _, _, btn1, btn2 = st.columns([2, 3, 1, 0.7, 0.7])
-    with btn1:
-        if st.button("💾 Save", key="save_btn"):
-            persist_state(user["username"])
-            st.success("Progress saved!")
-    with btn2:
-        if st.button("🚪 Logout", key="logout_btn"):
-            logout_and_rerun("You have been logged out.")
+    with col_right:
+        st.markdown('<div class="header-right">', unsafe_allow_html=True)
+        btn_cols = st.columns(2)
+        with btn_cols[0]:
+            if st.button("💾 Save", key="save_btn", use_container_width=True):
+                persist_state(user["username"])
+                st.success("Progress saved!")
+        with btn_cols[1]:
+            if st.button("🚪 Logout", key="logout_btn", use_container_width=True):
+                logout_and_rerun("You have been logged out.")
+        st.markdown('</div>', unsafe_allow_html=True)
 
 
 def handle_uploads() -> None:
-    st.markdown(
-        '''<div class="upload-area">
-            <div class="upload-title">Upload Workbooks</div>
-            <div class="upload-desc">Pull in the bilingual question bank and glossary supplied by the admin.</div>
-            <div class="upload-grid">''',
-        unsafe_allow_html=True,
-    )
+    st.markdown('<div class="upload-area">', unsafe_allow_html=True)
 
     col1, col2 = st.columns(2)
 
     with col1:
-        st.markdown('<div class="upload-item"><div class="upload-label">Bilingual Q&A workbook (.xlsx)</div>', unsafe_allow_html=True)
+        st.markdown('<div class="upload-label">Bilingual Q&A workbook (.xlsx)</div>', unsafe_allow_html=True)
         upload_cols = st.columns([3, 1])
         with upload_cols[0]:
             question_file = st.file_uploader("", type=["xlsx"], label_visibility="collapsed", key="questions_upload")
@@ -638,10 +625,9 @@ def handle_uploads() -> None:
                 f'<div class="success-toast">{st.session_state["questions_status"]}</div>',
                 unsafe_allow_html=True,
             )
-        st.markdown('</div>', unsafe_allow_html=True)
 
     with col2:
-        st.markdown('<div class="upload-item"><div class="upload-label">Glossary workbook (.xlsx)</div>', unsafe_allow_html=True)
+        st.markdown('<div class="upload-label">Glossary workbook (.xlsx)</div>', unsafe_allow_html=True)
         upload_cols = st.columns([3, 1])
         with upload_cols[0]:
             glossary_file = st.file_uploader("", type=["xlsx"], label_visibility="collapsed", key="glossary_upload")
@@ -661,9 +647,8 @@ def handle_uploads() -> None:
                 f'<div class="success-toast">{st.session_state["glossary_status"]}</div>',
                 unsafe_allow_html=True,
             )
-        st.markdown('</div>', unsafe_allow_html=True)
 
-    st.markdown("</div></div>", unsafe_allow_html=True)
+    st.markdown("</div>", unsafe_allow_html=True)
 
 
 def render_navigation(question_id: Optional[str], total_rows: int) -> None:
@@ -680,18 +665,9 @@ def render_navigation(question_id: Optional[str], total_rows: int) -> None:
     with info_section:
         st.markdown(
             f'''<div class="nav-info">
-                <div class="info-item">
-                    <span class="info-label">Current Row</span>
-                    <span class="info-value">{st.session_state.current_idx + 1}</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">Question ID</span>
-                    <span class="info-value">{question_id or "N/A"}</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">Total Rows</span>
-                    <span class="info-value">{total_rows}</span>
-                </div>
+                <span class="nav-info-text"><strong>Current Row:</strong> {st.session_state.current_idx + 1}</span>
+                <span class="nav-info-text"><strong>Question ID:</strong> {question_id or "N/A"}</span>
+                <span class="nav-info-text"><strong>Total Rows:</strong> {total_rows}</span>
             </div>''',
             unsafe_allow_html=True,
         )
