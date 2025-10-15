@@ -6,6 +6,85 @@ from typing import Dict, List, Optional, Tuple
 import pandas as pd
 import streamlit as st
 
+
+def inject_tailwind_theme() -> None:
+    """Load Tailwind (CDN) and align Streamlit widgets with a modern surface style."""
+    st.markdown(
+        """
+        <script src="https://cdn.tailwindcss.com"></script>
+        <style>
+        :root {
+            --brand-primary: #1c64f2;
+            --brand-accent: #2563eb;
+            --brand-surface: #f8fafc;
+            --brand-card: #ffffff;
+            --brand-border: #e2e8f0;
+            --brand-text: #0f172a;
+        }
+        body, .block-container {
+            background: var(--brand-surface);
+        }
+        .tw-card {
+            background: var(--brand-card);
+            border-radius: 1rem;
+            border: 1px solid var(--brand-border);
+            box-shadow: 0 20px 40px -25px rgba(15, 23, 42, 0.25);
+        }
+        .tw-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            background: rgba(28, 100, 242, 0.12);
+            color: var(--brand-primary);
+            padding: 0.25rem 0.8rem;
+            border-radius: 999px;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+        .stTextArea textarea, .stTextInput input, .stNumberInput input {
+            border-radius: 0.85rem !important;
+            border: 1px solid var(--brand-border) !important;
+            background: #f1f5f9 !important;
+            padding: 0.9rem 1.1rem !important;
+            font-size: 1rem !important;
+            color: var(--brand-text);
+        }
+        .stTextArea textarea:focus, .stTextInput input:focus, .stNumberInput input:focus {
+            border-color: rgba(28, 100, 242, 0.7) !important;
+            box-shadow: 0 0 0 4px rgba(28, 100, 242, 0.15) !important;
+        }
+        .stButton>button {
+            border-radius: 0.9rem;
+            padding: 0.65rem 1.4rem;
+            border: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            background: linear-gradient(135deg, var(--brand-primary), var(--brand-accent));
+            color: white;
+            transition: transform 0.12s ease, box-shadow 0.2s ease;
+        }
+        .stButton>button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 18px 28px -18px rgba(37, 99, 235, 0.55);
+        }
+        .stButton>button:disabled {
+            background: #cbd5f5;
+            color: #475569;
+            box-shadow: none;
+        }
+        div[data-testid="stDataFrame"] {
+            border-radius: 1rem;
+            border: 1px solid var(--brand-border);
+            overflow: hidden;
+            box-shadow: 0 18px 28px -25px rgba(15, 23, 42, 0.18);
+        }
+        header, footer {visibility: hidden;}
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
 # --- Configuration -----------------------------------------------------------------
 
 SESSION_ROOT = Path("session_store")
@@ -109,10 +188,12 @@ def bootstrap_state_from_disk(username: str) -> None:
 
 
 def store_login_state(username: str) -> None:
+    login_timestamp = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
     st.session_state.user = {
         "username": username,
         "display_name": USER_DIRECTORY[username]["display_name"],
         "role": USER_DIRECTORY[username]["role"],
+        "login_at": login_timestamp,
     }
     st.session_state.current_idx = 0
     st.session_state.question_df = None
@@ -253,11 +334,15 @@ def render_top_banner() -> None:
     now = datetime.now()
     banner = st.container()
     with banner:
-        cols = st.columns([1, 2, 1])
-        cols[0].markdown(f"**Date:** {now.strftime('%d-%m-%Y')}")
         user = st.session_state.get("user", {})
-        cols[1].markdown(f"**Subject Matter Expert (SME) Panel for:** {user.get('display_name', 'Unknown')}")
-        cols[2].markdown(f"**Time:** {now.strftime('%H:%M:%S')}")
+        teacher_name = user.get("display_name", "Unknown")
+        login_at = user.get("login_at", "—")
+        role = user.get("role", "")
+        cols = st.columns([1, 1, 1])
+        cols[0].markdown(f"**Today:** {now.strftime('%d-%m-%Y')}  \n**Current Time:** {now.strftime('%H:%M:%S')}")
+        role_suffix = f" ({role})" if role else ""
+        cols[1].markdown(f"**Teacher:** {teacher_name}{role_suffix}")
+        cols[2].markdown(f"**Logged in at:** {login_at}")
 
 
 def handle_uploads() -> None:
