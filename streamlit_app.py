@@ -320,6 +320,7 @@ USER_DIRECTORY: Dict[str, Dict[str, str]] = {
 QUESTION_COLUMN_CANDIDATES: Dict[str, List[str]] = {
     "tamil_question": ["கேள்வி", "கேள்வி ", "tamil_question"],
     "options": ["விருப்பங்கள்", "விருப்பங்கள் ", "questionOptions"],
+    "options_english": ["questionOptions", "Options", "Options (English)", "options_english"],
     "answer_tamil": ["பதில்", "பதில் ", "answers ", "answer_tamil"],
     "explanation_tamil": ["விளக்கம்", "விளக்கம் ", "tam_explanation"],
     "glossary": ["Glossary", "glossary"],
@@ -493,6 +494,22 @@ def ensure_row_buffer(row: pd.Series) -> None:
             "explanation_english": row.get(columns.get("explanation_english"), "") if columns else "",
         }
         st.session_state.row_cache_id = st.session_state.current_idx
+
+        widget_defaults = {
+            "tamil_q": st.session_state.row_cache["tamil_question"],
+            "eng_q": st.session_state.row_cache["question_english"],
+            "opt_optA": st.session_state.row_cache["optA"],
+            "opt_optB": st.session_state.row_cache["optB"],
+            "opt_optC": st.session_state.row_cache["optC"],
+            "opt_optD": st.session_state.row_cache["optD"],
+            "glossary_key": st.session_state.row_cache["glossary"],
+            "tamil_ans": st.session_state.row_cache["answer_tamil"],
+            "eng_ans": st.session_state.row_cache["answer_english"],
+            "tamil_expl": st.session_state.row_cache["explanation_tamil"],
+            "eng_expl": st.session_state.row_cache["explanation_english"],
+        }
+        for key, value in widget_defaults.items():
+            st.session_state[key] = value
 
 
 def apply_question_updates(action: str) -> None:
@@ -763,11 +780,17 @@ def render_reference_block(row: pd.Series, question_id: Optional[str]) -> None:
     columns = st.session_state.question_columns
     tamil_question = row.get(columns.get("tamil_question"), "") if columns else ""
     options = row.get(columns.get("options"), "") if columns else ""
+    if pd.isna(options):
+        options = ""
     tamil_answer = row.get(columns.get("answer_tamil"), "") if columns else ""
     tamil_exp = row.get(columns.get("explanation_tamil"), "") if columns else ""
     eng_question = row.get(columns.get("question_english"), "") if columns else ""
     eng_answer = row.get(columns.get("answer_english"), "") if columns else ""
     eng_exp = row.get(columns.get("explanation_english"), "") if columns else ""
+    english_options_col = columns.get("options_english") if columns else None
+    english_options = row.get(english_options_col, "") if english_options_col else ""
+    if pd.isna(english_options):
+        english_options = ""
 
     st.markdown(
         f'''<div class="reference-panel">
@@ -796,6 +819,10 @@ def render_reference_block(row: pd.Series, question_id: Optional[str]) -> None:
                     <div class="ref-item">
                         <div class="ref-label">Question</div>
                         <div class="ref-value">{eng_question or "—"}</div>
+                    </div>
+                    <div class="ref-item">
+                        <div class="ref-label">Options</div>
+                        <div class="ref-value">{english_options or "—"}</div>
                     </div>
                     <div class="ref-item">
                         <div class="ref-label">Answer</div>
